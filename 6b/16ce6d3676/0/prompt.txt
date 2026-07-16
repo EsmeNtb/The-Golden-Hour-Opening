@@ -1,0 +1,7 @@
+<environment_context>
+  <cwd>C:\Project\The-Golden-Hour-Opening\soiree-planner</cwd>
+  <shell>powershell</shell>
+  <current_date>2026-07-16</current_date>
+  <timezone>America/Mexico_City</timezone>
+  <filesystem><workspace_roots><root>C:\Project\The-Golden-Hour-Opening\soiree-planner</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>C:\Project\The-Golden-Hour-Opening\soiree-planner</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="read"><path>C:\Project\The-Golden-Hour-Opening\soiree-planner\.git</path></entry><entry access="read"><path>C:\Project\The-Golden-Hour-Opening\soiree-planner\.agents</path></entry><entry access="read"><path>C:\Project\The-Golden-Hour-Opening\soiree-planner\.codex</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
