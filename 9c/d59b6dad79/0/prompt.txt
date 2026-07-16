@@ -1,0 +1,4 @@
+Add an RSVP form to the Soirée Planner.
+
+Guests enter their name, choose attending or regrets, and can add a
+plus-one. Submitted RSVPs appear in the guest list immediately.
