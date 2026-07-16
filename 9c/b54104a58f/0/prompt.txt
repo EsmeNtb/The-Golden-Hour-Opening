@@ -1,0 +1,11 @@
+$ entire checkpoint list
+
+  CHECKPOINT     WHEN           SUMMARY
+  a1b2c3d4e5f6   2 minutes ago  Add golden hour countdown to planner
+  f6e5d4c3b2a1   9 minutes ago  Scaffold guest list app with RSVP tracking
+
+$ entire checkpoint explain a1b2c3d4e5f6
+
+  The user asked for a countdown to golden hour on opening night.
+  The agent added a timer component that computes time remaining
+  until sunset on night one and displays it above the guest list...
