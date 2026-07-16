@@ -1,0 +1,3 @@
+entire checkpoint list
+entire checkpoint explain <checkpoint-id> --generate
+entire checkpoint explain <checkpoint-id>
