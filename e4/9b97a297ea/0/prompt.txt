@@ -1,0 +1,1 @@
+I have a question this app I have to run it with vite mode i think for openden locally
