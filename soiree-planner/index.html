@@ -104,39 +104,72 @@
               <input name="plusOne" type="text" placeholder="Guest's name" />
             </label>
 
+            <label class="field diet-field">
+              <span>Your dietary preference</span>
+              <select name="diet">
+                <option value="none">None</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="gluten-free">Gluten-free</option>
+              </select>
+            </label>
+
+            <label class="field plus-one-diet-field">
+              <span>Plus-one dietary preference</span>
+              <select name="plusOneDiet" disabled>
+                <option value="none">None</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="gluten-free">Gluten-free</option>
+              </select>
+            </label>
+
             <button class="submit-button" type="submit">Send RSVP <span>→</span></button>
           </div>
           <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
 
+        <aside class="diet-summary" aria-labelledby="diet-summary-title">
+          <div>
+            <p class="eyebrow">For the caterer · Final Thursday</p>
+            <h3 id="diet-summary-title">Dietary count</h3>
+          </div>
+          <dl>
+            <div class="diet-none"><dt>None</dt><dd id="diet-count-none">3</dd></div>
+            <div class="diet-vegetarian"><dt>Vegetarian</dt><dd id="diet-count-vegetarian">2</dd></div>
+            <div class="diet-vegan"><dt>Vegan</dt><dd id="diet-count-vegan">1</dd></div>
+            <div class="diet-gluten-free"><dt>Gluten-free</dt><dd id="diet-count-gluten-free">1</dd></div>
+          </dl>
+        </aside>
+
         <div class="guest-list" id="guest-list">
           <article class="guest-row">
             <div class="avatar coral">AM</div>
-            <h3>Amelia Moore</h3>
-            <p class="plus-one"><span>Plus-one</span> Theo James</p>
+            <div class="guest-identity"><h3>Amelia Moore</h3><span class="diet-badge vegetarian">Vegetarian</span></div>
+            <p class="plus-one"><span>Plus-one</span><span class="guest-detail">Theo James <span class="diet-badge none">None</span></span></p>
             <span class="status confirmed">Confirmed</span>
           </article>
           <article class="guest-row">
             <div class="avatar gold">JL</div>
-            <h3>Jonah Lee</h3>
+            <div class="guest-identity"><h3>Jonah Lee</h3><span class="diet-badge vegan">Vegan</span></div>
             <p class="plus-one"><span>Plus-one</span> No guest</p>
             <span class="status confirmed">Confirmed</span>
           </article>
           <article class="guest-row">
             <div class="avatar rose">SR</div>
-            <h3>Sofia Reyes</h3>
-            <p class="plus-one"><span>Plus-one</span> Luca Martin</p>
+            <div class="guest-identity"><h3>Sofia Reyes</h3><span class="diet-badge none">None</span></div>
+            <p class="plus-one"><span>Plus-one</span><span class="guest-detail">Luca Martin <span class="diet-badge gluten-free">Gluten-free</span></span></p>
             <span class="status awaiting">Awaiting reply</span>
           </article>
           <article class="guest-row">
             <div class="avatar plum">NB</div>
-            <h3>Noah Bennett</h3>
-            <p class="plus-one"><span>Plus-one</span> Maya Chen</p>
+            <div class="guest-identity"><h3>Noah Bennett</h3><span class="diet-badge gluten-free">Gluten-free</span></div>
+            <p class="plus-one"><span>Plus-one</span><span class="guest-detail">Maya Chen <span class="diet-badge vegetarian">Vegetarian</span></span></p>
             <span class="status confirmed">Confirmed</span>
           </article>
           <article class="guest-row">
             <div class="avatar blush">EC</div>
-            <h3>Elena Cruz</h3>
+            <div class="guest-identity"><h3>Elena Cruz</h3><span class="diet-badge none">None</span></div>
             <p class="plus-one"><span>Plus-one</span> No guest</p>
             <span class="status declined">Can't attend</span>
           </article>

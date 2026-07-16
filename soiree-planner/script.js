@@ -33,7 +33,15 @@ const waitlistList = document.querySelector("#waitlist-list");
 const confirmedCount = document.querySelector("#confirmed-count");
 const spotsRemaining = document.querySelector("#spots-remaining");
 const formMessage = document.querySelector("#form-message");
+const plusOneInput = rsvpForm.elements.plusOne;
+const plusOneDietSelect = rsvpForm.elements.plusOneDiet;
 const guestCap = 120;
+const dietLabels = {
+  none: "None",
+  vegetarian: "Vegetarian",
+  vegan: "Vegan",
+  "gluten-free": "Gluten-free",
+};
 
 spotsRemaining.textContent = guestCap - Number(confirmedCount.textContent);
 
@@ -47,7 +55,19 @@ function getInitials(name) {
     .toUpperCase();
 }
 
-function createGuestRow(name, attendance, plusOne) {
+function createDietBadge(diet) {
+  const badge = document.createElement("span");
+  badge.className = `diet-badge ${diet}`;
+  badge.textContent = dietLabels[diet];
+  return badge;
+}
+
+function updateDietCount(diet) {
+  const count = document.querySelector(`#diet-count-${diet}`);
+  count.textContent = Number(count.textContent) + 1;
+}
+
+function createGuestRow(name, attendance, plusOne, diet, plusOneDiet) {
   const isAttending = attendance === "attending";
   const isWaitlisted = attendance === "waitlisted";
   const row = document.createElement("article");
@@ -57,22 +77,38 @@ function createGuestRow(name, attendance, plusOne) {
   avatar.className = `avatar ${isAttending ? "coral" : isWaitlisted ? "gold" : "blush"}`;
   avatar.textContent = getInitials(name);
 
+  const guestIdentity = document.createElement("div");
+  guestIdentity.className = "guest-identity";
   const guestName = document.createElement("h3");
   guestName.textContent = name;
+  guestIdentity.append(guestName, createDietBadge(diet));
 
   const plusOneDetail = document.createElement("p");
   plusOneDetail.className = "plus-one";
   const plusOneLabel = document.createElement("span");
   plusOneLabel.textContent = "Plus-one";
-  plusOneDetail.append(plusOneLabel, plusOne || "No guest");
+  plusOneDetail.append(plusOneLabel);
+  if (plusOne) {
+    const plusOneGuest = document.createElement("span");
+    plusOneGuest.className = "guest-detail";
+    plusOneGuest.append(plusOne, createDietBadge(plusOneDiet));
+    plusOneDetail.append(plusOneGuest);
+  } else {
+    plusOneDetail.append("No guest");
+  }
 
   const status = document.createElement("span");
   status.className = `status ${isAttending ? "confirmed" : isWaitlisted ? "waitlisted" : "declined"}`;
   status.textContent = isAttending ? "Confirmed" : isWaitlisted ? "Waitlisted" : "Can't attend";
 
-  row.append(avatar, guestName, plusOneDetail, status);
+  row.append(avatar, guestIdentity, plusOneDetail, status);
   return row;
 }
+
+plusOneInput.addEventListener("input", () => {
+  plusOneDietSelect.disabled = !plusOneInput.value.trim();
+  if (plusOneDietSelect.disabled) plusOneDietSelect.value = "none";
+});
 
 rsvpForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -81,26 +117,31 @@ rsvpForm.addEventListener("submit", (event) => {
   const name = data.get("name").trim();
   const attendance = data.get("attendance");
   const plusOne = data.get("plusOne").trim();
+  const diet = data.get("diet");
+  const plusOneDiet = plusOne ? data.get("plusOneDiet") : "none";
 
   if (attendance === "attending") {
     const partySize = plusOne ? 2 : 1;
     const currentConfirmed = Number(confirmedCount.textContent);
 
     if (currentConfirmed + partySize <= guestCap) {
-      guestList.prepend(createGuestRow(name, attendance, plusOne));
+      guestList.prepend(createGuestRow(name, attendance, plusOne, diet, plusOneDiet));
+      updateDietCount(diet);
+      if (plusOne) updateDietCount(plusOneDiet);
       const newConfirmed = currentConfirmed + partySize;
       confirmedCount.textContent = newConfirmed;
       spotsRemaining.textContent = guestCap - newConfirmed;
       formMessage.textContent = `Thank you, ${name}. Your party is confirmed.`;
     } else {
-      waitlistList.append(createGuestRow(name, "waitlisted", plusOne));
+      waitlistList.append(createGuestRow(name, "waitlisted", plusOne, diet, plusOneDiet));
       waitlist.hidden = false;
       formMessage.textContent = `Thank you, ${name}. There isn't enough room for your party, so you joined the waitlist.`;
     }
   } else {
-    guestList.prepend(createGuestRow(name, attendance, plusOne));
+    guestList.prepend(createGuestRow(name, attendance, plusOne, diet, plusOneDiet));
     formMessage.textContent = `Thank you, ${name}. Your reply is on the list.`;
   }
 
   rsvpForm.reset();
+  plusOneDietSelect.disabled = true;
 });

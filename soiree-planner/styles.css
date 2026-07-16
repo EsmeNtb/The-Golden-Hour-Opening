@@ -122,7 +122,7 @@ a { color: inherit; text-decoration: none; }
 .field { display: flex; flex-direction: column; gap: 9px; }
 .field > span, .attendance-field legend { color: #765d66; font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
 .field i { color: #a99196; font-style: normal; font-weight: 400; }
-.field input {
+.field input, .field select {
   width: 100%;
   padding: 12px 0;
   border: 0;
@@ -133,7 +133,9 @@ a { color: inherit; text-decoration: none; }
   font: inherit;
 }
 .field input::placeholder { color: #ad9598; }
-.field input:focus { border-color: var(--coral); }
+.field select { appearance: none; border-radius: 0; cursor: pointer; }
+.field select:disabled { cursor: not-allowed; opacity: .45; }
+.field input:focus, .field select:focus { border-color: var(--coral); }
 .attendance-field { margin: 0; padding: 0; border: 0; }
 .attendance-field legend { margin-bottom: 12px; }
 .reply-options { display: flex; gap: 8px; }
@@ -161,13 +163,25 @@ a { color: inherit; text-decoration: none; }
 .submit-button:hover { background: var(--coral); transform: translateY(-1px); }
 .submit-button span { font-size: 1rem; }
 .form-message { position: absolute; right: 38px; bottom: 10px; margin: 0; color: #627357; font-size: .7rem; }
+.diet-summary { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 42px; padding: 25px 28px; border-left: 3px solid var(--coral); background: #f4e1cf; }
+.diet-summary .eyebrow { margin-bottom: 7px; }
+.diet-summary h3 { margin: 0; font: 400 1.8rem "Italiana", serif; }
+.diet-summary dl { display: flex; gap: 12px; margin: 0; }
+.diet-summary dl div { min-width: 88px; padding: 10px 12px; border-radius: 3px; text-align: center; }
+.diet-summary dt { font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.diet-summary dd { margin: 4px 0 0; font: 400 1.45rem "Italiana", serif; }
+.diet-none { color: #665b61; background: #e4dbd4; }.diet-vegetarian { color: #4f714d; background: #dce8d3; }.diet-vegan { color: #277064; background: #cfe7df; }.diet-gluten-free { color: #825d27; background: #f2dfb8; }
 .guest-list { border-top: 1px solid #dfccbd; }
 .guest-row { display: grid; grid-template-columns: 52px 1.2fr 1fr auto; gap: 20px; align-items: center; padding: 22px 4px; border-bottom: 1px solid #dfccbd; }
 .avatar { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: white; font-size: .7rem; letter-spacing: .08em; }
 .avatar.coral { background: #c96652; }.avatar.gold { background: #c49347; }.avatar.rose { background: #a55465; }.avatar.plum { background: #67425f; }.avatar.blush { background: #cf8e80; }
+.guest-identity { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .guest-row h3 { margin: 0; font: 400 1.35rem "Italiana", serif; }
 .plus-one { margin: 0; color: #4f3846; font-size: .82rem; }
 .plus-one span { display: block; margin-bottom: 3px; color: #a68b91; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
+.plus-one .guest-detail { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 0; color: #4f3846; font-size: .82rem; letter-spacing: 0; text-transform: none; }
+.diet-badge { display: inline-block; padding: 4px 7px; border-radius: 99px; font-size: .55rem; font-weight: 600; letter-spacing: .05em; line-height: 1; text-transform: uppercase; }
+.diet-badge.none { color: #665b61; background: #e4dbd4; }.diet-badge.vegetarian { color: #4f714d; background: #dce8d3; }.diet-badge.vegan { color: #277064; background: #cfe7df; }.diet-badge.gluten-free { color: #825d27; background: #f2dfb8; }
 .status { min-width: 110px; padding: 8px 12px; border-radius: 99px; text-align: center; font-size: .66rem; font-weight: 600; letter-spacing: .06em; }
 .status.confirmed { color: #557051; background: #dde8d4; }.status.awaiting { color: #8f612b; background: #f6dfbb; }.status.declined { color: #8f5362; background: #efd4d8; }
 .status.waitlisted { color: #765723; background: #f4e2b9; }
@@ -221,6 +235,8 @@ footer { color: rgba(255,255,255,.55); background: #17121d; }
   .reply-options { flex-wrap: wrap; }
   .submit-button { min-height: 48px; margin-top: 4px; }
   .form-message { right: auto; bottom: 12px; left: 22px; }
+  .diet-summary { display: block; }
+  .diet-summary dl { display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; }
   .guest-row { grid-template-columns: 45px 1fr auto; gap: 10px; }
   .guest-row .plus-one { grid-column: 2; grid-row: 2; }
   .guest-row .status { grid-column: 3; grid-row: 1 / 3; min-width: 96px; }
