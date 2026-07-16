@@ -101,8 +101,8 @@ a { color: inherit; text-decoration: none; }
 .section { padding: 110px 0; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; }
 .section-heading h2 { margin: 0; font: 400 clamp(2.8rem, 5vw, 4.6rem) "Italiana", serif; }
-.guest-total { padding-bottom: 10px; color: #826d76; font-size: .78rem; }
-.guest-total strong { color: var(--coral); font: 400 1.5rem "Italiana", serif; }
+.guest-totals { display: grid; gap: 6px; padding-bottom: 10px; color: #826d76; font-size: .78rem; text-align: right; }
+.guest-totals strong { color: var(--coral); font: 400 1.5rem "Italiana", serif; }
 .rsvp-form {
   position: relative;
   display: grid;
@@ -170,6 +170,11 @@ a { color: inherit; text-decoration: none; }
 .plus-one span { display: block; margin-bottom: 3px; color: #a68b91; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
 .status { min-width: 110px; padding: 8px 12px; border-radius: 99px; text-align: center; font-size: .66rem; font-weight: 600; letter-spacing: .06em; }
 .status.confirmed { color: #557051; background: #dde8d4; }.status.awaiting { color: #8f612b; background: #f6dfbb; }.status.declined { color: #8f5362; background: #efd4d8; }
+.status.waitlisted { color: #765723; background: #f4e2b9; }
+.waitlist { margin-top: 72px; }
+.waitlist-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 24px; }
+.waitlist-heading h3 { margin: 0; font: 400 2.4rem "Italiana", serif; }
+.waitlist-heading > p { margin: 0 0 7px; color: #826d76; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
 
 .drinks { color: var(--cream); background: #2c1b30; }
 .drinks-heading > p { max-width: 260px; margin: 0 0 10px; color: rgba(255,255,255,.5); font: italic 1rem/1.5 Georgia, serif; }
@@ -209,7 +214,7 @@ footer { color: rgba(255,255,255,.55); background: #17121d; }
   .timer div { min-width: 48px; }.timer strong { font-size: 1.8rem; }
   .section { padding: 78px 0; }
   .section-heading { align-items: start; margin-bottom: 35px; }
-  .guest-total { display: none; }
+  .guest-totals { padding-bottom: 0; text-align: left; }
   .rsvp-form { grid-template-columns: 1fr; gap: 28px; margin-bottom: 48px; padding: 27px 22px 36px; }
   .form-intro > p:last-child { max-width: none; }
   .form-fields { grid-template-columns: 1fr; }
@@ -219,6 +224,8 @@ footer { color: rgba(255,255,255,.55); background: #17121d; }
   .guest-row { grid-template-columns: 45px 1fr auto; gap: 10px; }
   .guest-row .plus-one { grid-column: 2; grid-row: 2; }
   .guest-row .status { grid-column: 3; grid-row: 1 / 3; min-width: 96px; }
+  .waitlist { margin-top: 52px; }
+  .waitlist-heading > p { display: none; }
   .drink-grid { grid-template-columns: 1fr; }
   .drink-card { min-height: 475px; border: 0; border-bottom: 1px solid rgba(255,255,255,.13); }
   .drink-card:last-child { border-bottom: 0; }

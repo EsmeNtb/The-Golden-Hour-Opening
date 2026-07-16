@@ -28,8 +28,14 @@ setInterval(updateCountdown, 1000);
 
 const rsvpForm = document.querySelector("#rsvp-form");
 const guestList = document.querySelector("#guest-list");
+const waitlist = document.querySelector("#waitlist");
+const waitlistList = document.querySelector("#waitlist-list");
 const confirmedCount = document.querySelector("#confirmed-count");
+const spotsRemaining = document.querySelector("#spots-remaining");
 const formMessage = document.querySelector("#form-message");
+const guestCap = 120;
+
+spotsRemaining.textContent = guestCap - Number(confirmedCount.textContent);
 
 function getInitials(name) {
   return name
@@ -43,11 +49,12 @@ function getInitials(name) {
 
 function createGuestRow(name, attendance, plusOne) {
   const isAttending = attendance === "attending";
+  const isWaitlisted = attendance === "waitlisted";
   const row = document.createElement("article");
   row.className = "guest-row";
 
   const avatar = document.createElement("div");
-  avatar.className = `avatar ${isAttending ? "coral" : "blush"}`;
+  avatar.className = `avatar ${isAttending ? "coral" : isWaitlisted ? "gold" : "blush"}`;
   avatar.textContent = getInitials(name);
 
   const guestName = document.createElement("h3");
@@ -60,8 +67,8 @@ function createGuestRow(name, attendance, plusOne) {
   plusOneDetail.append(plusOneLabel, plusOne || "No guest");
 
   const status = document.createElement("span");
-  status.className = `status ${isAttending ? "confirmed" : "declined"}`;
-  status.textContent = isAttending ? "Confirmed" : "Can't attend";
+  status.className = `status ${isAttending ? "confirmed" : isWaitlisted ? "waitlisted" : "declined"}`;
+  status.textContent = isAttending ? "Confirmed" : isWaitlisted ? "Waitlisted" : "Can't attend";
 
   row.append(avatar, guestName, plusOneDetail, status);
   return row;
@@ -75,13 +82,25 @@ rsvpForm.addEventListener("submit", (event) => {
   const attendance = data.get("attendance");
   const plusOne = data.get("plusOne").trim();
 
-  guestList.prepend(createGuestRow(name, attendance, plusOne));
-
   if (attendance === "attending") {
     const partySize = plusOne ? 2 : 1;
-    confirmedCount.textContent = Number(confirmedCount.textContent) + partySize;
+    const currentConfirmed = Number(confirmedCount.textContent);
+
+    if (currentConfirmed + partySize <= guestCap) {
+      guestList.prepend(createGuestRow(name, attendance, plusOne));
+      const newConfirmed = currentConfirmed + partySize;
+      confirmedCount.textContent = newConfirmed;
+      spotsRemaining.textContent = guestCap - newConfirmed;
+      formMessage.textContent = `Thank you, ${name}. Your party is confirmed.`;
+    } else {
+      waitlistList.append(createGuestRow(name, "waitlisted", plusOne));
+      waitlist.hidden = false;
+      formMessage.textContent = `Thank you, ${name}. There isn't enough room for your party, so you joined the waitlist.`;
+    }
+  } else {
+    guestList.prepend(createGuestRow(name, attendance, plusOne));
+    formMessage.textContent = `Thank you, ${name}. Your reply is on the list.`;
   }
 
-  formMessage.textContent = `Thank you, ${name}. Your reply is on the list.`;
   rsvpForm.reset();
 });

@@ -66,7 +66,10 @@
             <p class="eyebrow">Around the table</p>
             <h2>The guest list</h2>
           </div>
-          <div class="guest-total"><strong id="confirmed-count">7</strong> guests confirmed</div>
+          <div class="guest-totals" aria-live="polite">
+            <span><strong id="confirmed-count">7</strong> guests confirmed</span>
+            <span><strong id="spots-remaining">113</strong> spots remaining</span>
+          </div>
         </div>
 
         <form class="rsvp-form" id="rsvp-form">
@@ -138,6 +141,17 @@
             <span class="status declined">Can't attend</span>
           </article>
         </div>
+
+        <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title" hidden>
+          <div class="waitlist-heading">
+            <div>
+              <p class="eyebrow">Next beneath the lights</p>
+              <h3 id="waitlist-title">Waitlist</h3>
+            </div>
+            <p>In order of signup</p>
+          </div>
+          <div class="guest-list" id="waitlist-list"></div>
+        </section>
       </section>
 
       <section class="drinks section" id="drinks">
